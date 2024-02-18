@@ -1,0 +1,23 @@
+[Config]
+
+nb_phases = 20
+
+[Phases]
+
+Portlandite = Ca(OH)2
+C3S = (CaO)3(SiO2)
+C2S = (CaO)2(SiO2)
+C3A = (CaO)3(Al3O3)
+C4AF = (CaO)4(Al2O3)(Fe2O3)
+Ettringite = Ca6Al2(SO4)3(OH)12(H2O)26
+C3AH6 = Ca3Al2(OH)12
+Monosulfoaluminate = Ca4Al2(SO4)(OH)12(H2O)6
+Monocarboaluminate = Ca4Al2(CO3)(OH)12(H2O)5
+Hemicarboaluminate = Ca4Al2(CO3)0.5(OH)13(H2O)5.5
+Straetlingite = Ca2Al2SiO2(OH)10(H2O)3
+Friedels_salt = Ca4Al2Cl2(OH)12(H2O)4
+Kuzels_salt = Ca4Al2Cl(SO4)0.5(OH)12(H2O)6
+Gypsum = CaSO4(H2O)2
+#C-S-H = CaSi0.57Al0.15
+#C-S-H_inner = CaSi0.75Al0.13
+Metakaolin = Ca0.00001Al2Si2O7

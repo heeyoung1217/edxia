@@ -1,0 +1,20 @@
+Repository :
+============
+Change setup.py
+Commit
+git tag -a vx.x.x -m "Version x.x.x"
+git push origin vx.x.x
+
+Pypi packages
+=============
+python3 setup.py sdist bdist_wheel
+python3 -m twine upload dist/edxia-x.x.x*
+
+conda packages :
+================
+conda activate <>
+conda skeleton pypi edxia
+# - check edxia/meta.yml
+conda-build edxia
+
+conda convert --platform all dev/conda-bld/linux-64/edxia-0.1.3-py37_0.tar.bz2

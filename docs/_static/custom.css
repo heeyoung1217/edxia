@@ -1,0 +1,4 @@
+/* change justification of class and functions headers */
+div dt {
+    text-align: left;
+}
