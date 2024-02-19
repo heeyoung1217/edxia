@@ -74,7 +74,7 @@ START_GLUE = not DRAW_PLOT #True
 
 # define the map
 # --------------
-data_path = "../example_map/"
+data_path = "../example_map_1/"
 pattern = os.path.join(data_path, "map_short_atom_{component}.txt")
 exp = MappingExperiment(pattern, label="example",
                         description="An example",
@@ -86,7 +86,7 @@ loader = PickleLoader(exp, filters=[DenoiseFilter(0.1),])
 
 # Create the composite
 # --------------------
-channels = CompositeChannels(["Fe", "Mg", "O"], [3, 4, 2])
+channels = CompositeChannels(["Fe", "Si", "Ca"], [3, 4, 2])
 composite = loader.load_composite(channels)
 bse = loader.load_edsmap("BSE")
 composite.mix_with_bse(bse, 0.6)
@@ -148,8 +148,8 @@ if DRAW_PLOT:
 
     colors = np.zeros((len(pts.df), 3))
     colors[:,0] = np.clip(pts.df["Fe"]*5, 0, 1)
-    colors[:,1] = np.clip(pts.df["Mg"]*5, 0, 1)
-    colors[:,2] = np.clip(pts.df["O"]*3, 0, 1)
+    colors[:,1] = np.clip(pts.df["Si"]*5, 0, 1)
+    colors[:,2] = np.clip(pts.df["Ca"]*3, 0, 1)
 
 
     ax5.scatter(pca_point_res[:,0], pca_point_res[:,1], s=1, c=colors)
@@ -162,18 +162,18 @@ if DRAW_PLOT:
     ax6.set_ylabel("PCA2")
 
 
-    ax4.scatter(pts.df["Fe"]/pts.df["O"], pts.df["Mg"]/pts.df["O"], s=1, c=colors)
+    ax4.scatter(pts.df["Fe"]/pts.df["Si"], pts.df["Si"]/pts.df["Ca"], s=1, c=colors)
     ax4.set_xlim([0, 1])
     ax4.set_ylim([0, 1])
 
-    ax4.set_xlabel("Fe/O")
-    ax4.set_ylabel("Mg/O")
+    ax4.set_xlabel("Fe/Si")
+    ax4.set_ylabel("Si/Ca")
 
     colors_gm = np.zeros((len(pts.df), 3))
     for i in range(nc):
         si = pts.df["Fe"][gm_point_labels == i].median()
-        al = pts.df["Mg"][gm_point_labels == i].median()
-        ca = pts.df["O"][gm_point_labels == i].median()
+        al = pts.df["Si"][gm_point_labels == i].median()
+        ca = pts.df["Ca"][gm_point_labels == i].median()
 
         colors_gm[gm_point_labels == i, 0] = min(si*5, 1)
         colors_gm[gm_point_labels == i, 1] = min(al*5, 1)
@@ -191,8 +191,8 @@ if DRAW_PLOT:
 
     for i in range(nc):
         si = pts.df["Fe"][gm_point_labels == i].median()
-        al = pts.df["Mg"][gm_point_labels == i].median()
-        ca = pts.df["O"][gm_point_labels == i].median()
+        al = pts.df["Si"][gm_point_labels == i].median()
+        ca = pts.df["Ca"][gm_point_labels == i].median()
 
         images[image_labels == i, 0] = min(si*5, 1)
         images[image_labels == i, 1] = min(al*5, 1)
@@ -240,8 +240,8 @@ if START_GLUE:
 
     for i in range(nc):
         si = pts.df["Fe"][gm_point_labels == i].median()
-        al = pts.df["Mg"][gm_point_labels == i].median()
-        ca = pts.df["O"][gm_point_labels == i].median()
+        al = pts.df["Si"][gm_point_labels == i].median()
+        ca = pts.df["Ca"][gm_point_labels == i].median()
 
         gm_point_state = ElementSubsetState(np.asarray(gm_point_labels == i), pts_data)
         sub = dc.new_subset_group("GM point subset {0}".format(i), gm_point_state)

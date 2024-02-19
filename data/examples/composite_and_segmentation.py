@@ -21,7 +21,7 @@ This script shows how to:
 """
 
 # The pattern to the maps
-pattern = "../example_map/map_short_atom_{component}.txt"
+pattern = "../example_map_1/map_short_atom_{component}.txt"
 
 # The loaders
 exp = MappingExperiment(pattern, "LC3-wc04-28d",
@@ -32,7 +32,7 @@ loader = PickleLoader(exp, filters=[DenoiseFilter(0.1),])
 
 
 # The composite
-channels = CompositeChannels(["Fe","Mg", "O"], factors=[4.0,4.0,2.0])
+channels = CompositeChannels(["Fe","Si", "Ca"], factors=[4.0,4.0,2.0])
 composite = loader.load_composite(channels)
 bse = loader.load_edsmap("BSE")
 composite.mix_with_bse(bse, 0.8)
@@ -78,18 +78,18 @@ ax[0,1].imshow(loader.load_edsmap("Fe").map,
 
 ax[1,0].set_aspect("equal")
 ax[1,0].set_axis_off()
-ax[1,0].set_title("Mg")
+ax[1,0].set_title("Si")
 ax[1,0].xaxis.set_visible(False)
 ax[1,0].yaxis.set_visible(False)
-ax[1,0].imshow(loader.load_edsmap("Mg").map,
+ax[1,0].imshow(loader.load_edsmap("Si").map,
           cmap=LinearSegmentedColormap("green", cdict_green))
 
 ax[1,1].set_aspect("equal")
 ax[1,1].set_axis_off()
-ax[1,1].set_title("O")
+ax[1,1].set_title("Ca")
 ax[1,1].xaxis.set_visible(False)
 ax[1,1].yaxis.set_visible(False)
-ax[1,1].imshow(loader.load_edsmap("O").map,
+ax[1,1].imshow(loader.load_edsmap("Ca").map,
           cmap=LinearSegmentedColormap("blue", cdict_blue))
 fig.tight_layout()
 plt.savefig("components.png")
@@ -123,16 +123,16 @@ plt.imsave('segmented.png', segmcolors)
 
 
 # The points
-stack = loader.load_stack(["Fe", "Mg", "O"])
+stack = loader.load_stack(["Fe", "Si", "Ca"])
 points = points_from_segmentation(stack, segmented)
 
 
 fig, ax = plt.subplots()
-ax.plot(points["Fe"]/points["O"],points["Mg"]/points["O"],".",color="#555555")
+ax.plot(points["Fe"]/points["Si"],points["Si"]/points["Ca"],".",color="#555555")
 ax.set_xlim([0,1])
 ax.set_ylim([0,0.8])
-ax.set_xlabel("Fe/O")
-ax.set_ylabel("Mg/O")
+ax.set_xlabel("Fe/Si")
+ax.set_ylabel("Si/Ca")
 ax.minorticks_on()
 ax.tick_params("x", which="both", bottom="True", top="True")
 ax.tick_params("y", which="both", left="True", right="True")
